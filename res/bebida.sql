@@ -5,7 +5,7 @@ USE mobywine;
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 16-Maio-2018 às 02:22
+-- Generation Time: 16-Maio-2018 às 02:32
 -- Versão do servidor: 5.6.20-log
 -- PHP Version: 5.4.31
 
@@ -31,6 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `bebida` (
 `id` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
+  `preco` decimal(12,2) NOT NULL,
   `pais` varchar(100) NOT NULL,
   `regiao` varchar(100) NOT NULL,
   `nome_produtor` varchar(100) NOT NULL,
