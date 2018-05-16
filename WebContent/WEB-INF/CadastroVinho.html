@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE HTML>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -24,80 +24,111 @@
 		    
 		    <div class="w-100"></div>
 		   
-		    <div class="col-sm-2" style="height:90vh; background: grey; word-wrap: break-word;"><div> adadadaadadadaadadadaadadadaadadadaadadadaadadadaadadada</div> </div>
+		    <div class="col-sm-2" style="height:90vh; background: #C9B8D3; word-wrap: break-word;"><div>
+
+
+			<a href="#" class="btn btn-primary btn-lg disabled" tabindex="-1" role="button" aria-disabled="true" style="background-color: #D6394B; border-color: white; margin-left:2vh; margin-top: 4vh">Cadastro de Vinho</a>
+			<a href="#" class="btn btn-primary btn-lg disabled" tabindex="-1" role="button" aria-disabled="true" style="width: 26vh; background-color: #D6394B; border-color: white; margin-left:2vh; margin-top: 2vh">Listar Vinhos</a>
+
+			</div> </div>
 		    
 		    <div class="col" style="background: #EDC0D2">
+		    
+		    <div class="row">
+		    
+		    <h1 class="display-4" style="margin-top: 2vh; margin-left: 2vh" >Cadastro de Vinho</h1>
+		    
+		    </div>
+		    
+		    <form name="cadastroWine" action="" method="post">
+		    
 				<div class="row" style="margin-top:5vh">
 				    <div class="col-sm-9" style="background: ;height:10vh;">
 				    
 						<div class="input-group mb-3">
 						  <div class="input-group-prepend">
-						    <span class="input-group-text" id="basic-addon3">Nome</span>
+						    <span class="input-group-text" id="basic-addon3" >Nome</span>
 						  </div>
-						  <input type="text" class="form-control" aria-describedby="basic-addon3">
+						  <input type="text" required="" class="form-control" aria-describedby="basic-addon3">
 						 
 						 </div>
 						 
 						 <div class="input-group mb-3">
 						  <div class="input-group-prepend">
-						    <span class="input-group-text" id="basic-addon3">País</span>
+						    <span class="input-group-text" id="basic-addon3" >País</span>
 						  </div>
 						  
-						  <input type="text" class="form-control" aria-describedby="basic-addon3" style="margin-right:2vh">
+						  <input type="text" class="form-control" aria-describedby="basic-addon3" style="margin-right:2vh" pattern="[a-zA-Z]+" title="Utilize apenas caracteres alfabéticos" required>
 						  
 						  <div class="input-group-prepend">
 						    <span class="input-group-text" id="basic-addon3">Região</span>
 						  </div>
 						  
 						  
-						  <input type="text" class="form-control" aria-describedby="basic-addon3">
+						  <input type="text" class="form-control" aria-describedby="basic-addon3" pattern="[a-zA-Z]+" title="Utilize apenas caracteres alfabéticos" required>
 						</div>
 						
 						
 						<div class="row">
 						
 						
-						<div class="col-sm-8">
+								<div class="col-sm-8">
+								<div class="input-group mb-3">
+								  
+								  
+								  <div class="input-group-prepend" >
+								    <span class="input-group-text" id="basic-addon3">Nome do produtor</span>
+								  </div>
+								  
+								  <input type="text" class="form-control" aria-describedby="basic-addon3" required>
+								</div>
+								</div>
+								
+								<div class="col-sm-4">
+								<div class="input-group mb-3">
+								  
+								  
+								  <div class="input-group-prepend" >
+								    <span class="input-group-text" id="basic-addon3">Ano da Safra</span>
+								  </div>
+								  
+								  <input type="text" class="form-control" aria-describedby="basic-addon3" maxlength="4" pattern="[0-9]{4}" title="Entre com o ano" required>
+								</div>
+								</div>
+								
+						
+						</div>
+						
+						
 						<div class="input-group mb-3">
-						  
-						  
-						  <div class="input-group-prepend" >
-						    <span class="input-group-text" id="basic-addon3">Nome do produtor</span>
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon3">Descrição</span>
 						  </div>
-						  
-						  <input type="text" class="form-control" aria-describedby="basic-addon3" >
-						</div>
-						</div>
-						
-						<div class="col-sm-4">
-						<div class="input-group mb-3">
-						  
-						  
-						  <div class="input-group-prepend" >
-						    <span class="input-group-text" id="basic-addon3">Ano da Safra</span>
-						  </div>
-						  
-						  <input type="text" class="form-control" aria-describedby="basic-addon3" >
-						</div>
-						</div>
-						
-						
-						
-						</div>
+						  <textarea class="form-control" aria-label="With textarea" style="resize:none" required></textarea>
+						 
+						 </div>
 						
 						<div class="input-group mb-3">
 						  <div class="input-group-prepend">
 						    <span class="input-group-text">Upload</span>
 						  </div>
 						  <div class="custom-file">
-						    <input type="file" class="custom-file-input" id="inputGroupFile01">
+						    <input type="file" class="custom-file-input" id="inputGroupFile01" required>
 						    <label class="custom-file-label" for="inputGroupFile01">Imagem</label>
 						  </div>
 						</div>
 						
+						<button type="submit" class="btn btn-primary" style="background-color: #D6394B;border-color: white">
+
+						  Salvar
+						
+						</button>
+						
 				   		</div>
 				    <div class="col-sm-3" style="background: #D6394B;height:10vh;"><h1>IBAGEM</h1></div>
 				</div>
+				
+				</form>
 			</div>
 		  </div>
 	</div>	
