@@ -35,9 +35,9 @@ CREATE TABLE IF NOT EXISTS `bebida` (
   `pais` varchar(100) NOT NULL,
   `regiao` varchar(100) NOT NULL,
   `nome_produtor` varchar(100) NOT NULL,
-  `ano_safra` date NOT NULL,
+  `ano_safra` varchar(4) NOT NULL,
   `descricao` text NOT NULL,
-  `nome_imagem` varchar(100) NOT NULL DEFAULT 'img_placeholder'
+  `tipo_vinho` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --

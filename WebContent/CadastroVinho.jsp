@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE HTML>
 <html lang="en">
   <head>
@@ -40,7 +43,7 @@
 		    
 		    </div>
 		    
-		    <form name="cadastroWine" action="" method="post">
+		    <form name="cadastroVinho" action="Cadastro" method="post">
 		    
 				<div class="row" style="margin-top:5vh">
 				    <div class="col-sm-9" style="background: ;height:10vh;">
@@ -49,7 +52,7 @@
 						  <div class="input-group-prepend">
 						    <span class="input-group-text" id="basic-addon3" >Nome</span>
 						  </div>
-						  <input type="text" required="" class="form-control" aria-describedby="basic-addon3">
+						  <input type="text" required="" name="nome" class="form-control" aria-describedby="basic-addon3">
 						 
 						 </div>
 						 
@@ -58,14 +61,14 @@
 						    <span class="input-group-text" id="basic-addon3" >País</span>
 						  </div>
 						  
-						  <input type="text" class="form-control" aria-describedby="basic-addon3" style="margin-right:2vh" pattern="[a-zA-Z]+" title="Utilize apenas caracteres alfabéticos" required>
+						  <input type="text" name="pais" class="form-control" aria-describedby="basic-addon3" style="margin-right:2vh" pattern="[a-zA-Z]+" title="Utilize apenas caracteres alfabéticos" required>
 						  
 						  <div class="input-group-prepend">
 						    <span class="input-group-text" id="basic-addon3">Região</span>
 						  </div>
 						  
 						  
-						  <input type="text" class="form-control" aria-describedby="basic-addon3" pattern="[a-zA-Z]+" title="Utilize apenas caracteres alfabéticos" required>
+						  <input type="text" name="regiao" class="form-control" aria-describedby="basic-addon3" pattern="[a-zA-Z]+" title="Utilize apenas caracteres alfabéticos" required>
 						</div>
 						
 						
@@ -80,7 +83,7 @@
 								    <span class="input-group-text" id="basic-addon3">Nome do produtor</span>
 								  </div>
 								  
-								  <input type="text" class="form-control" aria-describedby="basic-addon3" required>
+								  <input type="text" name="nome_produtor" class="form-control" aria-describedby="basic-addon3" required>
 								</div>
 								</div>
 								
@@ -92,7 +95,7 @@
 								    <span class="input-group-text" id="basic-addon3">Ano da Safra</span>
 								  </div>
 								  
-								  <input type="text" class="form-control" aria-describedby="basic-addon3" maxlength="4" pattern="[0-9]{4}" title="Entre com o ano" required>
+								  <input type="text" name="ano_safra" class="form-control" aria-describedby="basic-addon3" maxlength="4" pattern="[0-9]{4}" title="Entre com o ano" required>
 								</div>
 								</div>
 								
@@ -104,7 +107,7 @@
 						  <div class="input-group-prepend">
 						    <span class="input-group-text" id="basic-addon3">Descrição</span>
 						  </div>
-						  <textarea class="form-control" aria-label="With textarea" style="resize:none" required></textarea>
+						  <textarea name="descricao" class="form-control" aria-label="With textarea" style="resize:none" required></textarea>
 						 
 						 </div>
 						
@@ -113,11 +116,30 @@
 						    <span class="input-group-text">Upload</span>
 						  </div>
 						  <div class="custom-file">
-						    <input type="file" class="custom-file-input" id="inputGroupFile01" required>
+						    <input name="imagem" type="file" class="custom-file-input" id="inputGroupFile01" required>
 						    <label class="custom-file-label" for="inputGroupFile01">Imagem</label>
 						  </div>
 						</div>
 						
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+						   	<label class="input-group-text" for="inputGroupSelect01">Tipo de Vinhos</label>
+						</div>
+							 <select class="custom-select" id="inputGroupSelect01" name="tipo_vinho" style="max-width:30vh; margin-right: 5vh;">
+							   <option selected>Selecione</option>
+							   <option value="1">Tinto</option>
+							   <option value="2">Branco</option>
+							   <option value="3">Rosé
+							   </option>
+							 </select>
+						  
+						  <div class="input-group-prepend">
+						    <span class="input-group-text">Preço R$</span>
+						    
+						  </div>
+						  <input required name="preco" type="text" class="form-control"  value="${vinho.preco}" style="max-width:20vh;" title="Entre com o valor em R$0.00" maxlength="11" pattern="^\d{0,9}(\.\d{1,2})?$">
+						</div>
+												
 						<button type="submit" class="btn btn-primary" style="background-color: #D6394B;border-color: white">
 
 						  Salvar
