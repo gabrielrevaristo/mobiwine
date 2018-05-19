@@ -18,11 +18,14 @@ public class Editar extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 
 	{
-
+		if (request.getParameter("id") == null)
+			return;
+		if (request.getParameter("id").isEmpty())
+			return;
 		//Obtendo o rgm do aluno a ser atualizado
 				int id = Integer.parseInt(request.getParameter("id"));
 				
-				//Obtendo o registro do aluno com base no RGM
+				//Obtendo o registro do vinho com base no ID
 				Vinho vinho= new MobiWineDAO().retrieve(id);
 				if (vinho == null) {
 					response.getWriter().println("'vinho' is null");
@@ -51,6 +54,7 @@ public class Editar extends HttpServlet
 				String descricao 	  = request.getParameter("descricao");
 				String imagem  	 	  = "teste"; //request.getParameter("txtimagem");
 				String preco     	  = request.getParameter("preco");
+				String tipoVinho = request.getParameter("tipoVinho");
 						
 //				//Obtendo a imagem (foto do aluno) 
 //				Part arquivo = request.getPart("txtArquivo");
@@ -73,21 +77,19 @@ public class Editar extends HttpServlet
 //				} 
 //				
 				//Criando um objeto Aluno
-				Vinho vinho = new Vinho(id, nome, pais, regiao, nomeProdutor, anoSafra, descricao, imagem, preco);
+				Vinho vinho = new Vinho(id, nome, pais, regiao, nomeProdutor, anoSafra, descricao, preco, tipoVinho);
 				
 				//DAO para atualização do registro
+				System.out.println("Atualizando produto de id: " + String.valueOf(id));
 				new MobiWineDAO().update(vinho);
 
 				
 				
 			    //Exibindo alerta de sucesso e redirencionando para tela de vinhos
 				PrintWriter out = response.getWriter();
-				out.println("<script> alert('Cadastro Alterado com Sucesso');  top.window.location = 'EditarVinho"
+				out.println("<script> alert('Cadastro Alterado com Sucesso');  top.window.location = 'CadastroVinho"
 						+ ".jsp';</script>");
 
-
-				
-				
 			}
 		
 	

@@ -83,6 +83,7 @@ public class Vinho {
 	}
 	
 	public Vinho(int id, String nome, String pais, String regiao, String nomeProdutor, String anoSafra, String descricao, String preco, String tipoVinho) {
+		this.id = id;
 		this.nome = nome;
 		this.pais = pais;
 		this.regiao = regiao;

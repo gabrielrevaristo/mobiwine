@@ -118,7 +118,7 @@
 						    <span class="input-group-text">Upload</span>
 						  </div>
 						  <div class="custom-file">
-						    <input name="imagem" type="file" class="custom-file-input" id="inputGroupFile01" required>
+						    <input name="imagem" type="file" class="custom-file-input" id="inputGroupFile01">
 						    <label class="custom-file-label" for="inputGroupFile01">Imagem</label>
 						  </div>
 						</div>
@@ -127,7 +127,7 @@
 							<div class="input-group-prepend">
 						   	<label class="input-group-text" for="inputGroupSelect01">Tipo de Vinhos</label>
 						</div>
-							 <select class="custom-select" id="inputGroupSelect01" style="max-width:30vh; margin-right: 5vh;">
+							 <select name="tipoVinho" class="custom-select" id="inputGroupSelect01" style="max-width:30vh; margin-right: 5vh;">
 							 	<%
 							 		String tipo = (String) request.getAttribute("tipoVinho");
 							 		out.println("Tipo " + tipo);

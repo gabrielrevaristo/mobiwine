@@ -116,7 +116,7 @@
 						    <span class="input-group-text">Upload</span>
 						  </div>
 						  <div class="custom-file">
-						    <input name="imagem" type="file" class="custom-file-input" id="inputGroupFile01" required>
+						    <input name="imagem" type="file" class="custom-file-input" id="inputGroupFile01">
 						    <label class="custom-file-label" for="inputGroupFile01">Imagem</label>
 						  </div>
 						</div>
