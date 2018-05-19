@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/getImagem")
+@WebServlet("/GetImagem")
 public class GetImagem extends HttpServlet {
 	private String nomeCompletoImg;
 	private static String IMG_PLACEHOLDER = "do_not_rename.jpg";

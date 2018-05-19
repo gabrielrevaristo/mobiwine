@@ -128,13 +128,30 @@
 						   	<label class="input-group-text" for="inputGroupSelect01">Tipo de Vinhos</label>
 						</div>
 							 <select class="custom-select" id="inputGroupSelect01" style="max-width:30vh; margin-right: 5vh;">
-							   <option selected>Selecione</option>
-							   <option value="1" <%if(request.getParameter("tipoVinho").equals("1")){out.print("selected");} %>>Tinto</option>
-							   <option value="2">Branco</option>
-							   <option value="3">Rosé
+							 	<%
+							 		String tipo = (String) request.getAttribute("tipoVinho");
+							 		out.println("Tipo " + tipo);
+							 		switch (tipo) {
+							 		case "1":
+							 		default:
+							 			out.println("<option value=\"1\" selected>Tinto</option>");
+							 			out.println("<option value=\"2\">Branco</option>");
+							 			out.println("<option value=\"3\">Rosé</option>");
+							 			break;
+							 		case "2":
+							 			out.println("<option value=\"1\">Tinto</option>");
+							 			out.println("<option value=\"2\" selected>Branco</option>");
+							 			out.println("<option value=\"3\">Rosé</option>");
+							 			break;
+							 		case "3":
+							 			out.println("<option value=\"1\">Tinto</option>");
+							 			out.println("<option value=\"2\">Branco</option>");
+							 			out.println("<option value=\"3\" selected>Rosé</option>");
+							 			break;
+							 		}
+							 	%>
 							   </option>
 							 </select>
-						  
 						  <div class="input-group-prepend">
 						    <span class="input-group-text">Preço R$</span>
 						    

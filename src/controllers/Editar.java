@@ -20,13 +20,18 @@ public class Editar extends HttpServlet
 	{
 
 		//Obtendo o rgm do aluno a ser atualizado
-				String id   = request.getParameter("id");
+				int id = Integer.parseInt(request.getParameter("id"));
 				
 				//Obtendo o registro do aluno com base no RGM
 				Vinho vinho= new MobiWineDAO().retrieve(id);
+				if (vinho == null) {
+					response.getWriter().println("'vinho' is null");
+					return;
+				}
 						
 				//Passando o objeto aluno como atributo para ser exibido no JSP
 				request.setAttribute("vinho", vinho);
+				request.setAttribute("tipoVinho", vinho.getTipoVinho());
 				
 				//Encaminhando a requisição para o arquivo JSP
 				request.getRequestDispatcher("EditarVinho.jsp").forward(request, response);
@@ -37,7 +42,7 @@ public class Editar extends HttpServlet
 	{
 		
 		//Obtendo os dados dos campos do formulário
-				String id             = request.getParameter("id");
+				int id                = Integer.parseInt(request.getParameter("id"));
 				String nome   	      = request.getParameter("nome");
 				String pais  	      = request.getParameter("pais");
 				String regiao 	      = request.getParameter("regiao");

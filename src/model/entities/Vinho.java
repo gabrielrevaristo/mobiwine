@@ -2,7 +2,7 @@ package model.entities;
 
 public class Vinho {
 	
-	private String id;
+	private int id;
 	private String nome;
 	private String pais;
 	private String regiao;
@@ -19,10 +19,10 @@ public class Vinho {
 	public void setTipoVinho(String tipoVinho) {
 		this.tipoVinho = tipoVinho;
 	}
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getNome() {
@@ -82,7 +82,7 @@ public class Vinho {
 		this.preco = preco;
 	}
 	
-	public Vinho(String id, String nome, String pais, String regiao, String nomeProdutor, String anoSafra, String descricao, String preco, String tipoVinho) {
+	public Vinho(int id, String nome, String pais, String regiao, String nomeProdutor, String anoSafra, String descricao, String preco, String tipoVinho) {
 		this.nome = nome;
 		this.pais = pais;
 		this.regiao = regiao;

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/deletar")
+@WebServlet("/Deletar")
 public class Deletar extends HttpServlet 
 {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 

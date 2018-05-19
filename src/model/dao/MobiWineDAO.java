@@ -54,7 +54,7 @@ public class MobiWineDAO {
 		}
 	}
 	
-	public Vinho retrieve(String id) {
+	public Vinho retrieve(int id) {
 		try {			
 			//Define uma variável do tipo vinho com valor nulo
 			//Caso o a execução deste método não retorne nenhum
@@ -71,7 +71,7 @@ public class MobiWineDAO {
 			//Esta linha poderá causar uma exceção em tempo de compilação 
 			//chamada SQLException				
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setString(1, String.valueOf(id));
+			stmt.setInt(1, id);
 			
 			//Executa a instrução SQL no Banco de Dados e obtém o resultado da consulta
 			//Esta linha poderá causar uma exceção em tempo de compilação 
@@ -83,6 +83,7 @@ public class MobiWineDAO {
 			//cria um objeto do tipo Vinho com os dados
 			if (rs.next()) {
 				vinho = new Vinho();
+				vinho.setId(id);
 				vinho.setNome(rs.getString("nome"));
 				vinho.setPais(rs.getString("pais"));
 				vinho.setRegiao(rs.getString("regiao"));
@@ -91,6 +92,7 @@ public class MobiWineDAO {
 				vinho.setDescricao(rs.getString("descricao"));
 				//vinho.setImagem(rs.getString("imagem"));
 				vinho.setPreco(rs.getString("preco"));
+				vinho.setTipoVinho(rs.getString("tipo_vinho"));
 				
 			}
 			
@@ -99,7 +101,6 @@ public class MobiWineDAO {
 			stmt.close();
 			conn.close();
 			
-			vinho.setId(id);
 			
 			//Retorna o objeto do tipo vinho
 			return vinho;
@@ -107,6 +108,7 @@ public class MobiWineDAO {
 		} catch (Exception e) {
 			//Caso uma das duas linhas especificada causem alguma exceção
 			//este bloco irá tratar lançando uma exceção em tempo de execução.			
+			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
 		}
 	}
@@ -175,7 +177,7 @@ public class MobiWineDAO {
 			stmt.setString(6, vinho.getAnoSafra());
 			stmt.setString(7, vinho.getDescricao());
 			stmt.setString(8, vinho.getTipoVinho());
-			stmt.setString(9, vinho.getId());
+			stmt.setInt(9, vinho.getId());
 			
 			
 			System.out.println(stmt);
