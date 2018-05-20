@@ -118,8 +118,8 @@
 						    <span class="input-group-text">Upload</span>
 						  </div>
 						  <div class="custom-file">
-						    <input name="imagem" type="file" class="custom-file-input" id="inputGroupFile01">
-						    <label class="custom-file-label" for="inputGroupFile01">Imagem</label>
+						    <input id="imgFile" name="imgFile" type="file" class="custom-file-input" id="inputGroupFile01">
+						    <label id="fileLabel" class="custom-file-label" for="inputGroupFile01">Imagem</label>
 						  </div>
 						</div>
 						
@@ -167,7 +167,9 @@
 						</button>
 						
 				   		</div>
-				    <div class="col-sm-3" style="background: #D6394B;height:10vh;"><h1>IBAGEM</h1></div>
+					<div class="col-sm-3" style="background: #D6394B;min-width:200px;min-height:200px">
+				    	<img id="img" name="img" src="GetImagem?id=-1" width="99" height="200" style="display:block;margin:auto; position:relative; top:50%; transform:translateY(-50%); background:#D6394B;"/>
+					</div>
 				</div>
 				
 				</form>
@@ -180,5 +182,35 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-  </body>
+  </body><script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script type="text/javascript">
+	$("#imgFile").change(function() {
+		loadPreview(this);
+	});
+  	function loadPreview(data) 
+  	{
+		if (data.files && data.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				var img = new Image();
+				img.src = e.target.result;
+				console.log("natural width " + img.naturalWidth);
+				console.log("natural height " + img.naturalHeight);
+				img.width = img.naturalWidth;
+				img.height = img.naturalHeight;
+				while (img.width > 200 || img.height > 200) {
+					img.width = img.width * 0.9;
+					img.height = img.height * 0.9;
+				}
+				console.log("width " + img.width);
+				console.log("height " + img.height);
+				$("#img").attr("width", img.width);
+				$("#img").attr("height", img.height);
+				$("#img").attr("src", img.src);
+				$("#fileLabel").text($("#imgFile").val());
+			}
+			reader.readAsDataURL(data.files[0]);
+		}
+  	}
+  </script>
 </html>
