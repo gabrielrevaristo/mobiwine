@@ -116,7 +116,7 @@
 						    <span class="input-group-text">Upload</span>
 						  </div>
 						  <div class="custom-file">
-						    <input id="imgFile" name="imgFile" type="file" class="custom-file-input" id="inputGroupFile01">
+						    <input onchange="loadFile(event)" id="imgFile" name="imgFile" type="file" class="custom-file-input" id="inputGroupFile01">
 						    <label id="fileLabel" class="custom-file-label" for="inputGroupFile01">Imagem</label>
 						  </div>
 						</div>
@@ -165,33 +165,27 @@
   </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script type="text/javascript">
-	$("#imgFile").change(function() {
-		loadPreview(this);
-	});
-  	function loadPreview(data) 
-  	{
-		if (data.files && data.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				var img = new Image();
-				img.src = e.target.result;
-				console.log("natural width " + img.naturalWidth);
-				console.log("natural height " + img.naturalHeight);
+		var loadFile = function(event) {
+		    var img = document.getElementById('img');
+		    img.src = URL.createObjectURL(event.target.files[0]);
+		    img.onload = function() {
 				img.width = img.naturalWidth;
 				img.height = img.naturalHeight;
+				console.log("Tamanho original");
+				console.log(img.width);
+				console.log(img.height);
 				while (img.width > 200 || img.height > 200) {
-					img.width = img.width * 0.9;
-					img.height = img.height * 0.9;
+					img.width *= 0.9;
+					img.height *= 0.9;
 				}
-				console.log("width " + img.width);
-				console.log("height " + img.height);
-				$("#img").attr("width", img.width);
-				$("#img").attr("height", img.height);
-				$("#img").attr("src", img.src);
-				$("#fileLabel").text($("#imgFile").val());
-			}
-			reader.readAsDataURL(data.files[0]);
-		}
-  	}
+				console.log("Tamanho redimensionado")
+				console.log(img.width);
+				console.log(img.height);
+				var nomeArquivo = $("#imgFile").val();
+				nomeArquivo = nomeArquivo.substring(nomeArquivo.lastIndexOf("\\") + 1);
+				console.log(nomeArquivo);
+				$("#fileLabel").text(nomeArquivo);
+		    }
+	    };
   </script>
 </html>

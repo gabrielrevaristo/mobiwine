@@ -168,7 +168,7 @@
 						
 				   		</div>
 					<div class="col-sm-3" style="background: #D6394B;min-width:200px;min-height:200px">
-				    	<img id="img" name="img" src="GetImagem?id=-1" width="99" height="200" style="display:block;margin:auto; position:relative; top:50%; transform:translateY(-50%); background:#D6394B;"/>
+				    	<img id="img" name="img" src="GetImagem?id=${ vinho.id }" width="99" height="200" style="display:block;margin:auto; position:relative; top:50%; transform:translateY(-50%); background:#D6394B;"/>
 					</div>
 				</div>
 				
@@ -184,33 +184,27 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
   </body><script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script type="text/javascript">
-	$("#imgFile").change(function() {
-		loadPreview(this);
-	});
-  	function loadPreview(data) 
-  	{
-		if (data.files && data.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				var img = new Image();
-				img.src = e.target.result;
-				console.log("natural width " + img.naturalWidth);
-				console.log("natural height " + img.naturalHeight);
+		var loadFile = function(event) {
+		    var img = document.getElementById('img');
+		    img.src = URL.createObjectURL(event.target.files[0]);
+		    img.onload = function() {
 				img.width = img.naturalWidth;
 				img.height = img.naturalHeight;
+				console.log("Tamanho original");
+				console.log(img.width);
+				console.log(img.height);
 				while (img.width > 200 || img.height > 200) {
-					img.width = img.width * 0.9;
-					img.height = img.height * 0.9;
+					img.width *= 0.9;
+					img.height *= 0.9;
 				}
-				console.log("width " + img.width);
-				console.log("height " + img.height);
-				$("#img").attr("width", img.width);
-				$("#img").attr("height", img.height);
-				$("#img").attr("src", img.src);
-				$("#fileLabel").text($("#imgFile").val());
-			}
-			reader.readAsDataURL(data.files[0]);
-		}
-  	}
+				console.log("Tamanho redimensionado")
+				console.log(img.width);
+				console.log(img.height);
+				var nomeArquivo = $("#imgFile").val();
+				nomeArquivo = nomeArquivo.substring(nomeArquivo.lastIndexOf("\\") + 1);
+				console.log(nomeArquivo);
+				$("#fileLabel").text(nomeArquivo);
+		    }
+	    };
   </script>
 </html>
