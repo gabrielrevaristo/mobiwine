@@ -165,7 +165,16 @@
   </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script type="text/javascript">
+  		function validarExtensao()
+  		{
+  			var formatosPermitidos = /(\.jpg|\.jpeg|\.png)$/i;
+  			if (!formatosPermitidos.exec($("#imgFile").val())) {
+  				$("#imgFile").val("");
+  				alert("Tipo de arquivo não permitido.\nSáo válidos apenas arquivos .jpg e .png");
+  			}
+  		}
 		var loadFile = function(event) {
+			validarExtensao();
 		    var img = document.getElementById('img');
 		    img.src = URL.createObjectURL(event.target.files[0]);
 		    img.onload = function() {
