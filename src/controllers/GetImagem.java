@@ -31,7 +31,7 @@ public class GetImagem extends HttpServlet {
 		if (request.getParameter("id") == null || request.getParameter("id").isEmpty())
 			return;
 		int id = Integer.parseInt(request.getParameter("id"));
-		String caminhoPastaImagem = request.getServletContext().getRealPath("imagens");
+		String caminhoPastaImagem = request.getServletContext().getRealPath("/imagens");
 		byte[] imagem = recuperarImagemOuDefault(caminhoPastaImagem, id);
 		if (imagem == null)
 			return;
@@ -49,7 +49,7 @@ public class GetImagem extends HttpServlet {
 		try {
 			imagem = recuperarImagem(caminhoPasta, id);
 			if (imagem == null) {
-				imagem = Files.readAllBytes(Paths.get(caminhoPasta, "do_not_rename.jpg"));
+				imagem = Files.readAllBytes(Paths.get(caminhoPasta, IMG_PLACEHOLDER));
 				this.nomeCompletoImg = IMG_PLACEHOLDER;
 			}
 			System.out.println("Retornando imagem " + this.nomeCompletoImg);

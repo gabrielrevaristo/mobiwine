@@ -52,7 +52,7 @@ public class Cadastrar extends HttpServlet {
 			String extensao = imagem.getSubmittedFileName().split("\\.")[1];
 			String nomeImagem = String.valueOf(id) +  "." + extensao;
 			// Obtendo caminho da pasta 'imagens'
-			String caminho = request.getServletContext().getRealPath("imagens");
+			String caminho = request.getServletContext().getRealPath("/imagens");
 			// Obtendo caminho completo para salvar a imagem
 			Path caminhoCompleto = Paths.get(caminho, nomeImagem);
 			System.out.println("Salvando imagem em: " + caminhoCompleto);
