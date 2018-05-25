@@ -43,7 +43,7 @@
 		    
 		    </div>
 		    
-		    <form name="cadastroVinho" action="Cadastro" method="post">
+		    <form name="cadastroVinho" action="Cadastro" method="post" enctype="multipart/form-data">
 		    
 				<div class="row" style="margin-top:5vh">
 				    <div class="col-sm-9" style="background: ;height:10vh;">

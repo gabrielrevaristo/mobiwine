@@ -3,6 +3,7 @@ package model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 
@@ -10,7 +11,7 @@ import model.entities.Vinho;
 import util.ConnectionFactory;
 
 public class MobiWineDAO {
-	public void create(Vinho vinho) {
+	public int create(Vinho vinho) {
 		try {
 			//Obtém uma conexão com Banco de Dados
 			Connection conn = ConnectionFactory.getConnection();
@@ -22,7 +23,7 @@ public class MobiWineDAO {
 			//Prepara a instrução a ser executada no Banco de dados
 			//Esta linha poderá causar uma exceção em tempo de compilação 
 			//chamada SQLException			
-			PreparedStatement stmt = conn.prepareStatement(sql);
+			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			
 
 			//Define os valores para cada um dos pontos de interrogação
@@ -42,10 +43,19 @@ public class MobiWineDAO {
 			//chamada SQLException
 			stmt.executeUpdate();	
 			
+			
+			// Recuperando o id cadastrado
+			ResultSet rs = stmt.getGeneratedKeys();
+			int id = -1;
+			if (rs.next())
+				id = rs.getInt(1);
+
+			
 			//Encerra a execução de instrução SQL
 			//Encerra a conexão com o Banco
 			stmt.close();
 			conn.close();
+			return id;
 			
 		} catch (Exception e) {
 			//Caso uma das duas linhas especificada causem alguma exceção

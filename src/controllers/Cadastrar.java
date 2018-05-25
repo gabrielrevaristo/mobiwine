@@ -1,8 +1,8 @@
 package controllers;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -36,32 +36,30 @@ public class Cadastrar extends HttpServlet {
 		String descricao 	  = request.getParameter("descricao");
 		String preco     	  = request.getParameter("preco");
 		String tipoVinho      = request.getParameter("tipo_vinho");
-		
-//		//Obtendo a imagem (foto do aluno) 
-//		Part arquivo = request.getPart("txtArquivo");
-//		
-//		if (arquivo.getSize() != 0) {	
-//			//Obtendo a extensão do arquivo
-//			String ext = arquivo.getSubmittedFileName().split("\\.")[1];
-//
-//			//Obtendo o caminho das imagens
-//			String caminho = request.getServletContext().getRealPath("imagens");
-//			
-//			//Monta o nome do arquivo de imagem
-//			foto = rgm + "." + ext;
-//			
-//			//Monta o caminho completo da imagem
-//			caminho = caminho + "/" + foto;
-//			
-//			//Grava a imagem no caminho definido
-//			arquivo.write(caminho);
-//		} 
-		
-		//Criando um objeto Vinho
+		Part imagem           = request.getPart("imgFile");
+
+		// Cria um objeto vinho
 		Vinho vinho = new Vinho(nome, pais, regiao, nomeProdutor, anoSafra, descricao, preco, tipoVinho);
 		
-		//DAO para inserir registro
-		new MobiWineDAO().create(vinho);
+		
+		// Salva objeto no banco de dados
+		int id = new MobiWineDAO().create(vinho);
+		System.out.println("id cadastrado: " + String.valueOf(id));
+		
+		
+		// Salva uma imagem, caso tenha sido upada no formato <id>.<extensao>
+		if (imagem.getSize() != 0) {
+			String extensao = imagem.getSubmittedFileName().split("\\.")[1];
+			String nomeImagem = String.valueOf(id) +  "." + extensao;
+			// Obtendo caminho da pasta 'imagens'
+			String caminho = request.getServletContext().getRealPath("imagens");
+			// Obtendo caminho completo para salvar a imagem
+			Path caminhoCompleto = Paths.get(caminho, nomeImagem);
+			System.out.println("Salvando imagem em: " + caminhoCompleto);
+			// Grava a imagem no caminho definido
+			imagem.write(caminhoCompleto.toString());
+		}
+		
 		
 		//Chamando a view de cadastro novamente
 		request.getRequestDispatcher("CadastroVinho.jsp").forward(request, response);

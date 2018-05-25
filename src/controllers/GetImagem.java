@@ -19,18 +19,18 @@ public class GetImagem extends HttpServlet {
 	private static String IMG_PLACEHOLDER = "do_not_rename.jpg";
 	
 	
+	/*
+	 * Pode haver problemas ao utilizar o getRealPath(), pois ele retorna um endereço
+	 * da pasta 'imagens' na pasta do Tomcat, que demora para sincronizar com a pasta 'imagens'
+	 * em WebContent. 
+	 * Portanto, as imagens também devem ser salvas utilizando getRealPath()
+	*/
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 
 	{
 		if (request.getParameter("id") == null || request.getParameter("id").isEmpty())
 			return;
 		int id = Integer.parseInt(request.getParameter("id"));
-		/*
-		 * Pode haver problemas ao utilizar o getRealPath(), pois ele retorna um endereço
-		 * da pasta 'imagens' na pasta do Tomcat, que demora para sincronizar com a pasta 'imagens'
-		 * em WebContent. 
-		 * Portanto, as imagens também devem ser salvas utilizando getRealPath()
-		 */
 		String caminhoPastaImagem = request.getServletContext().getRealPath("imagens");
 		byte[] imagem = recuperarImagemOuDefault(caminhoPastaImagem, id);
 		if (imagem == null)
