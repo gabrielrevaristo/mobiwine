@@ -103,6 +103,7 @@ public class Editar extends HttpServlet
 	private void removerImagemExistente(String caminhoPasta, int id)
 		throws Exception
 	{
+		System.out.println("Tentando remover uma possível img já cadastrada...");
 		String imgParaDeletar = null;
 		String strId = String.valueOf(id);
 		File diretorio = new File(caminhoPasta);

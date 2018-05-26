@@ -216,5 +216,14 @@
 				$("#fileLabel").text(nomeArquivo);
 		    }
 	    };
+	    $(document).ready(function() {
+			var img = document.getElementById('img');
+			img.width = img.naturalWidth;
+			img.height = img.naturalHeight;
+			while (img.width > 200 || img.height > 200) {
+				img.width *= 0.9;
+				img.height *= 0.9;
+			}
+	    });
   </script>
 </html>

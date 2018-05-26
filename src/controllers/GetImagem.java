@@ -1,12 +1,16 @@
 package controllers;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,6 +33,9 @@ public class GetImagem extends HttpServlet {
 		byte[] imagem = recuperarImagemOuDefault(caminhoPastaImagem, id);
 		if (imagem == null)
 			return;
+		int[] dimensoes = calcularDimensoes(imagem);
+		request.setAttribute("naturalWidth", dimensoes[0]);
+		request.setAttribute("naturalHeight", dimensoes[1]);
 		response.setContentLength(imagem.length);
 		System.out.println("Content length: " + String.valueOf(imagem.length));
 		response.setContentType(URLConnection.guessContentTypeFromName(this.nomeCompletoImg));
@@ -75,5 +82,20 @@ public class GetImagem extends HttpServlet {
 			System.err.println("Não foi possível abrir a imagem do produto");
 		}
 		return imagem;
+	}
+	
+	
+	private int[] calcularDimensoes(byte[] imagem)
+	{
+		int[] dimensoes = {100, 100};
+		InputStream is = new ByteArrayInputStream(imagem);
+		try {
+			BufferedImage bi = ImageIO.read(is);
+			dimensoes[0] = bi.getWidth();
+			dimensoes[1] = bi.getHeight();
+		} catch (Exception e) {
+			System.err.println("Não foi possível calcular as dimensões da imagem");
+		}
+		return dimensoes;
 	}
 }
