@@ -122,50 +122,7 @@ public class MobiWineDAO {
 			throw new RuntimeException(e.getMessage());
 		}
 	}
-//	
-//	public Vinho retrieve(Vinho vinho) {
-//		try {			
-//			//Obtém uma conexão com Banco de Dados
-//			Connection conn = ConnectionFactory.getConnection();
-//			
-//			//Define o comando SQL de seleção
-//			String sql = "SELECT * FROM vinho WHERE rgm = ?";
-//			
-//			//Prepara a instrução a ser executada no Banco de dados
-//			//Esta linha poderá causar uma exceção em tempo de compilação 
-//			//chamada SQLException				
-//			PreparedStatement stmt = conn.prepareStatement(sql);
-//			stmt.setString(1, vinho.getRgm());
-//			
-//			//Executa a instrução SQL no Banco de Dados e obtém o resultado da consulta
-//			//Esta linha poderá causar uma exceção em tempo de compilação 
-//			//chamada SQLException			
-//			ResultSet rs = stmt.executeQuery();
-//			
-//			//Caso exista algum dado de vinho retornado da consulta
-//			//cria um objeto do tipo Vinho com os dados
-//			if (rs.next()) {
-//				vinho = new Vinho();
-//				vinho.setNome(rs.getString("nome"));
-//				vinho.setEmail(rs.getString("email"));
-//				vinho.setEmail(rs.getString("foto"));
-//			}
-//			
-//			//Encerra a execução de instrução SQL
-//			//Encerra a conexão com o Banco			
-//			stmt.close();
-//			conn.close();
-//			
-//			//Retorna o objeto do tipo vinho
-//			return vinho;
-//			
-//		} catch (Exception e) {
-//			//Caso uma das duas linhas especificada causem alguma exceção
-//			//este bloco irá tratar lançando uma exceção em tempo de execução.			
-//			throw new RuntimeException(e.getMessage());
-//		}
-//	}
-//	
+
 	public int update(Vinho vinho) {
 		try {
 			//Obtém uma conexão com Banco de Dados
@@ -212,33 +169,34 @@ public class MobiWineDAO {
 		}
 
 	}
-//	
-//	public void delete(String rgm) {
-//		try {
-//			//Obtém uma conexão com Banco de Dados
-//			Connection conn = ConnectionFactory.getConnection();
-//			
-//			//Define o comando SQL de exclusão
-//			String sql = "DELETE FROM vinho WHERE rgm=" + rgm;
-//			
-//			//Prepara a instrução a ser executada no Banco de dados
-//			//Esta linha poderá causar uma exceção em tempo de compilação 
-//			//chamada SQLException				
-//			PreparedStatement stmt = conn.prepareStatement(sql);
-//			stmt.execute();
-//			
-//			//Encerra a execução de instrução SQL
-//			//Encerra a conexão com o Banco				
-//			stmt.close();
-//			conn.close();
-//			
-//		} catch (Exception e) {
-//			//Caso uma das duas linhas especificada causem alguma exceção
-//			//este bloco irá tratar lançando uma exceção em tempo de execução.			
-//			throw new RuntimeException(e.getMessage());
-//		}
-//	}
-//	
+	
+	public void delete(int id) {
+		try {
+			//Obtém uma conexão com Banco de Dados
+			Connection conn = ConnectionFactory.getConnection();
+
+			//Define o comando SQL de exclusão
+			String sql = "DELETE FROM bebida WHERE id=?";
+
+			//Prepara a instrução a ser executada no Banco de dados
+			//Esta linha poderá causar uma exceção em tempo de compilação 
+			//chamada SQLException				
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			stmt.execute();
+
+			//Encerra a execução de instrução SQL
+			//Encerra a conexão com o Banco				
+			stmt.close();
+			conn.close();
+
+		} catch (Exception e) {
+			//Caso uma das duas linhas especificada causem alguma exceção
+			//este bloco irá tratar lançando uma exceção em tempo de execução.			
+			throw new RuntimeException(e.getMessage());
+		}
+	}
+	
 //	public ArrayList<Vinho> ListAll() {
 //		try {			
 //			//Cria um objeto que representa a lista de Vinhos
