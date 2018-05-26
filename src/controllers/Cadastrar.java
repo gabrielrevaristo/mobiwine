@@ -16,7 +16,7 @@ import model.dao.MobiWineDAO;
 import model.entities.Vinho;
 
 @WebServlet("/Cadastro")
-@MultipartConfig
+@MultipartConfig()
 public class Cadastrar extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

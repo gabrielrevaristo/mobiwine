@@ -17,7 +17,7 @@
 	
 	</style>
 
-    <title>Editar de Vinho</title>
+    <title>Editar Vinho</title>
   </head>
   <body style="height: 100%;">
   
@@ -40,13 +40,13 @@
 		    
 		    <div class="row">
 		    
-		    <h1 class="display-4" style="margin-top: 2vh; margin-left: 2vh" >Cadastro de Vinho</h1>
+		    <h1 class="display-4" style="margin-top: 2vh; margin-left: 2vh" >Editar Cadastro</h1>
 		    
 		    </div>
 		    
-		    <form name="editarVinho" action="Editar" method="post">
+		    <form name="editarVinho" action="Editar" method="POST" enctype="multipart/form-data">
 		    
-				<input type="hidden" name="id" value="${vinho.id}">		    
+				<input name="id" type="hidden" value="${vinho.id}">		    
 				<div class="row" style="margin-top:5vh">
 				    <div class="col-sm-9" style="background: ;height:10vh;">
 				    
@@ -118,7 +118,7 @@
 						    <span class="input-group-text">Upload</span>
 						  </div>
 						  <div class="custom-file">
-						    <input id="imgFile" name="imgFile" type="file" class="custom-file-input" id="inputGroupFile01">
+						    <input onchange="loadFile(event)" id="imgFile" name="imgFile" type="file" class="custom-file-input" id="inputGroupFile01">
 						    <label id="fileLabel" class="custom-file-label" for="inputGroupFile01">Imagem</label>
 						  </div>
 						</div>
@@ -182,7 +182,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-  </body><script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script type="text/javascript">
   		function validarExtensao()
   		{
