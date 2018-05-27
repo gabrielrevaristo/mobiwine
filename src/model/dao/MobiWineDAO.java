@@ -3,6 +3,7 @@ package model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 
@@ -10,7 +11,7 @@ import model.entities.Vinho;
 import util.ConnectionFactory;
 
 public class MobiWineDAO {
-	public void create(Vinho vinho) {
+	public int create(Vinho vinho) {
 		try {
 			//Obtém uma conexão com Banco de Dados
 			Connection conn = ConnectionFactory.getConnection();
@@ -22,7 +23,7 @@ public class MobiWineDAO {
 			//Prepara a instrução a ser executada no Banco de dados
 			//Esta linha poderá causar uma exceção em tempo de compilação 
 			//chamada SQLException			
-			PreparedStatement stmt = conn.prepareStatement(sql);
+			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			
 
 			//Define os valores para cada um dos pontos de interrogação
@@ -42,10 +43,19 @@ public class MobiWineDAO {
 			//chamada SQLException
 			stmt.executeUpdate();	
 			
+			
+			// Recuperando o id cadastrado
+			ResultSet rs = stmt.getGeneratedKeys();
+			int id = -1;
+			if (rs.next())
+				id = rs.getInt(1);
+
+			
 			//Encerra a execução de instrução SQL
 			//Encerra a conexão com o Banco
 			stmt.close();
 			conn.close();
+			return id;
 			
 		} catch (Exception e) {
 			//Caso uma das duas linhas especificada causem alguma exceção
@@ -112,50 +122,7 @@ public class MobiWineDAO {
 			throw new RuntimeException(e.getMessage());
 		}
 	}
-//	
-//	public Vinho retrieve(Vinho vinho) {
-//		try {			
-//			//Obtém uma conexão com Banco de Dados
-//			Connection conn = ConnectionFactory.getConnection();
-//			
-//			//Define o comando SQL de seleção
-//			String sql = "SELECT * FROM vinho WHERE rgm = ?";
-//			
-//			//Prepara a instrução a ser executada no Banco de dados
-//			//Esta linha poderá causar uma exceção em tempo de compilação 
-//			//chamada SQLException				
-//			PreparedStatement stmt = conn.prepareStatement(sql);
-//			stmt.setString(1, vinho.getRgm());
-//			
-//			//Executa a instrução SQL no Banco de Dados e obtém o resultado da consulta
-//			//Esta linha poderá causar uma exceção em tempo de compilação 
-//			//chamada SQLException			
-//			ResultSet rs = stmt.executeQuery();
-//			
-//			//Caso exista algum dado de vinho retornado da consulta
-//			//cria um objeto do tipo Vinho com os dados
-//			if (rs.next()) {
-//				vinho = new Vinho();
-//				vinho.setNome(rs.getString("nome"));
-//				vinho.setEmail(rs.getString("email"));
-//				vinho.setEmail(rs.getString("foto"));
-//			}
-//			
-//			//Encerra a execução de instrução SQL
-//			//Encerra a conexão com o Banco			
-//			stmt.close();
-//			conn.close();
-//			
-//			//Retorna o objeto do tipo vinho
-//			return vinho;
-//			
-//		} catch (Exception e) {
-//			//Caso uma das duas linhas especificada causem alguma exceção
-//			//este bloco irá tratar lançando uma exceção em tempo de execução.			
-//			throw new RuntimeException(e.getMessage());
-//		}
-//	}
-//	
+
 	public int update(Vinho vinho) {
 		try {
 			//Obtém uma conexão com Banco de Dados
@@ -202,78 +169,85 @@ public class MobiWineDAO {
 		}
 
 	}
-//	
-//	public void delete(String rgm) {
-//		try {
-//			//Obtém uma conexão com Banco de Dados
-//			Connection conn = ConnectionFactory.getConnection();
-//			
-//			//Define o comando SQL de exclusão
-//			String sql = "DELETE FROM vinho WHERE rgm=" + rgm;
-//			
-//			//Prepara a instrução a ser executada no Banco de dados
-//			//Esta linha poderá causar uma exceção em tempo de compilação 
-//			//chamada SQLException				
-//			PreparedStatement stmt = conn.prepareStatement(sql);
-//			stmt.execute();
-//			
-//			//Encerra a execução de instrução SQL
-//			//Encerra a conexão com o Banco				
-//			stmt.close();
-//			conn.close();
-//			
-//		} catch (Exception e) {
-//			//Caso uma das duas linhas especificada causem alguma exceção
-//			//este bloco irá tratar lançando uma exceção em tempo de execução.			
-//			throw new RuntimeException(e.getMessage());
-//		}
-//	}
-//	
-//	public ArrayList<Vinho> ListAll() {
-//		try {			
-//			//Cria um objeto que representa a lista de Vinhos
-//			ArrayList<Vinho> vinhos = new ArrayList<>();
-//			
-//			//Obtém uma conexão com Banco de Dados
-//			Connection conn = ConnectionFactory.getConnection();
-//			
-//			//Define o comando SQL de seleção
-//			String sql = "SELECT * FROM vinho";
-//			
-//			//Prepara a instrução a ser executada no Banco de dados
-//			//Esta linha poderá causar uma exceção em tempo de compilação 
-//			//chamada SQLException				
-//			PreparedStatement stmt = conn.prepareStatement(sql);
-//			
-//			//Executa a instrução SQL no Banco de Dados e obtém o resultado da consulta
-//			//Esta linha poderá causar uma exceção em tempo de compilação 
-//			//chamada SQLException				
-//			ResultSet rs = stmt.executeQuery();
-//			
-//			//Enquanto houver linhas de dados retornado da consulta
-//			//cria um objeto com os dados de cada linha e adiciona à lista
-//			while (rs.next()) {
-//				Vinho a = new Vinho();
-//				a.setRgm(rs.getString("rgm"));
-//				a.setNome(rs.getString("nome"));
-//				a.setEmail(rs.getString("email"));
-//				a.setFoto(rs.getString("foto"));
-//				
-//				vinhos.add(a);
-//			}
-//			
-//			//Encerra a execução de instrução SQL
-//			//Encerra a conexão com o Banco				
-//			stmt.close();
-//			conn.close();
-//			
-//			//Retorna o objeto que representa a lista 
-//			return vinhos;
-//			
-//		} catch (Exception e) {
-//			//Caso uma das duas linhas especificada causem alguma exceção
-//			//este bloco irá tratar lançando uma exceção em tempo de execução.			
-//			throw new RuntimeException(e.getMessage());
-//		}
-//	}
+	
+	public void delete(int id) {
+		try {
+			//Obtém uma conexão com Banco de Dados
+			Connection conn = ConnectionFactory.getConnection();
+
+			//Define o comando SQL de exclusão
+			String sql = "DELETE FROM bebida WHERE id=?";
+
+			//Prepara a instrução a ser executada no Banco de dados
+			//Esta linha poderá causar uma exceção em tempo de compilação 
+			//chamada SQLException				
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			stmt.execute();
+
+			//Encerra a execução de instrução SQL
+			//Encerra a conexão com o Banco				
+			stmt.close();
+			conn.close();
+
+		} catch (Exception e) {
+			//Caso uma das duas linhas especificada causem alguma exceção
+			//este bloco irá tratar lançando uma exceção em tempo de execução.			
+			throw new RuntimeException(e.getMessage());
+		}
+	}
+	
+	public ArrayList<Vinho> RetrieveAll() {
+		try {			
+			//Cria um objeto que representa a lista de Vinhos
+			ArrayList<Vinho> vinhos = new ArrayList<>();
+			
+			//Obtém uma conexão com Banco de Dados
+			Connection conn = ConnectionFactory.getConnection();
+			
+			//Define o comando SQL de seleção
+			String sql = "SELECT * FROM bebida";
+			
+			//Prepara a instrução a ser executada no Banco de dados
+			//Esta linha poderá causar uma exceção em tempo de compilação 
+			//chamada SQLException				
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+    		//Executa a instrução SQL no Banco de Dados e obtém o resultado da consulta
+			//Esta linha poderá causar uma exceção em tempo de compilação 
+			//chamada SQLException				
+			ResultSet rs = stmt.executeQuery();
+			
+			//Enquanto houver linhas de dados retornado da consulta
+			//cria um objeto com os dados de cada linha e adiciona à lista
+			while (rs.next()) {
+				Vinho v = new Vinho();
+				v.setId(rs.getInt("id"));
+				v.setNome(rs.getString("nome"));
+				v.setPais(rs.getString("pais"));
+				v.setRegiao(rs.getString("regiao"));
+				v.setNomeProdutor(rs.getString("nome_produtor"));
+				v.setAnoSafra(rs.getString("ano_safra").substring(0, 4));
+				v.setDescricao(rs.getString("descricao"));
+				//vinho.setImagem(rs.getString("imagem"));
+				v.setPreco(rs.getString("preco"));
+				v.setTipoVinho(rs.getString("tipo_vinho"));
+				
+				vinhos.add(v);
+			}
+			
+			//Encerra a execução de instrução SQL
+			//Encerra a conexão com o Banco				
+			stmt.close();
+			conn.close();
+			
+			//Retorna o objeto que representa a lista 
+			return vinhos;
+			
+ 		} catch (Exception e) {
+			//Caso uma das duas linhas especificada causem alguma exceção
+			//este bloco irá tratar lançando uma exceção em tempo de execução.			
+			throw new RuntimeException(e.getMessage());
+		}
+	}
 }

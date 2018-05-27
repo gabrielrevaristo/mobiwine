@@ -23,15 +23,17 @@
   
   <div class="container-fluid" style="margin: 0px">
 		  <div class="row">
-		    <div class="col" style="background: #D6394B;height:10vh;"><h1>Logotipo</h1></div>
+		    
+			<div class="col" style="background: #D6394B;height:10vh;"><img src="imagens/baleia.png" style="background: #D6394B;height:10vh; float:left;margin-right:5%"/><h1 style="margin-top:1%;">MOBIWINE</h1></div>
+			
 		    
 		    <div class="w-100"></div>
 		   
 		    <div class="col-sm-2" style="height:90vh; background: #C9B8D3; word-wrap: break-word;"><div>
 
 
-			<a href="#" class="btn btn-primary btn-lg disabled" tabindex="-1" role="button" aria-disabled="true" style="background-color: #D6394B; border-color: white; margin-left:2vh; margin-top: 4vh">Cadastro de Vinho</a>
-			<a href="#" class="btn btn-primary btn-lg disabled" tabindex="-1" role="button" aria-disabled="true" style="width: 26vh; background-color: #D6394B; border-color: white; margin-left:2vh; margin-top: 2vh">Listar Vinhos</a>
+			<a href="Cadastro" class="btn btn-primary btn-lg" tabindex="-1" role="button" aria-disabled="true" style="width: 35vh; background-color: #D6394B; border-color: white; margin-left:2vh; margin-top: 4vh">Cadastro de Vinho</a>
+			<a href="Listar" class="btn btn-primary btn-lg" tabindex="-1" role="button" aria-disabled="true" style="width: 35vh; background-color: #D6394B; border-color: white; margin-left:2vh; margin-top: 2vh">Listar Vinhos</a>
 
 			</div> </div>
 		    
@@ -43,7 +45,7 @@
 		    
 		    </div>
 		    
-		    <form name="cadastroVinho" action="Cadastro" method="post">
+		    <form name="cadastroVinho" action="Cadastro" method="post" enctype="multipart/form-data">
 		    
 				<div class="row" style="margin-top:5vh">
 				    <div class="col-sm-9" style="background: ;height:10vh;">
@@ -116,8 +118,8 @@
 						    <span class="input-group-text">Upload</span>
 						  </div>
 						  <div class="custom-file">
-						    <input name="imagem" type="file" class="custom-file-input" id="inputGroupFile01" required>
-						    <label class="custom-file-label" for="inputGroupFile01">Imagem</label>
+						    <input onchange="loadFile(event)" id="imgFile" name="imgFile" type="file" class="custom-file-input" id="inputGroupFile01">
+						    <label id="fileLabel" class="custom-file-label" for="inputGroupFile01">Imagem</label>
 						  </div>
 						</div>
 						
@@ -147,7 +149,9 @@
 						</button>
 						
 				   		</div>
-				    <div class="col-sm-3" style="background: #D6394B;height:10vh;"><h1>IBAGEM</h1></div>
+				    <div class="col-sm-3" style="background: #D6394B;min-width:200px;min-height:200px">
+				    	<img id="img" name="img" src="GetImagem?id=-1" width="99" height="200" style="display:block;margin:auto; position:relative; top:50%; transform:translateY(-50%); background:#D6394B;"/>
+					</div>
 				</div>
 				
 				</form>
@@ -161,4 +165,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
   </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script type="text/javascript">
+  		function validarExtensao()
+  		{
+  			var formatosPermitidos = /(\.jpg|\.jpeg|\.png)$/i;
+  			if (!formatosPermitidos.exec($("#imgFile").val())) {
+  				$("#imgFile").val("");
+  				alert("Tipo de arquivo não permitido.\nSáo válidos apenas arquivos .jpg e .png");
+  			}
+  		}
+		var loadFile = function(event) {
+			validarExtensao();
+		    var img = document.getElementById('img');
+		    img.src = URL.createObjectURL(event.target.files[0]);
+		    img.onload = function() {
+				img.width = img.naturalWidth;
+				img.height = img.naturalHeight;
+				console.log("Tamanho original");
+				console.log(img.width);
+				console.log(img.height);
+				while (img.width > 200 || img.height > 200) {
+					img.width *= 0.9;
+					img.height *= 0.9;
+				}
+				console.log("Tamanho redimensionado")
+				console.log(img.width);
+				console.log(img.height);
+				var nomeArquivo = $("#imgFile").val();
+				nomeArquivo = nomeArquivo.substring(nomeArquivo.lastIndexOf("\\") + 1);
+				console.log(nomeArquivo);
+				$("#fileLabel").text(nomeArquivo);
+		    }
+	    };
+  </script>
 </html>

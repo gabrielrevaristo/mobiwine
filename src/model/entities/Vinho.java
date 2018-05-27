@@ -83,6 +83,7 @@ public class Vinho {
 	}
 	
 	public Vinho(int id, String nome, String pais, String regiao, String nomeProdutor, String anoSafra, String descricao, String preco, String tipoVinho) {
+		this.id = id;
 		this.nome = nome;
 		this.pais = pais;
 		this.regiao = regiao;
@@ -91,6 +92,11 @@ public class Vinho {
 		this.descricao = descricao;
 		this.tipoVinho = tipoVinho;
 		this.preco = preco;
+	}
+	
+	public String toString() {
+		String vinho = this.id + " - " + this.nome + " - " + this.pais + " - " + this.regiao + " - " + this.nomeProdutor + " - " + this.anoSafra + " - " + this.descricao + " - " + this.tipoVinho + " - " + this.preco;
+		return vinho;
 	}
 	
 
