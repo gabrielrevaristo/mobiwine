@@ -3,7 +3,7 @@
  
 Dynamic Web Project
 
- Final project for Java for Web Devlopment discipline.
+ Final project for Java for Web Development course.
  
  
 
