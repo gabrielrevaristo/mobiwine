@@ -62,3 +62,10 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+INSERT INTO `bebida`(`nome`, `preco`, `pais`, `regiao`, `nome_produtor`, `ano_safra`, `descricao`, `tipo_vinho`) 
+VALUES 
+("vinho1", 100.00, "Brasil", "SP", "Vinci Wines", "1980", "Good wine!", "1"),
+("vinho2", 200.00, "Brasil", "SP", "Vinci Wines", "1990", "Great wine!", "2"),
+("vinho3", 300.00, "Brasil", "SP", "Vinci Wines", "2000", "Awesome wine", "3");

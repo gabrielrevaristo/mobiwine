@@ -18,9 +18,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/GetImagem")
-public class GetImagem extends HttpServlet {
+public class GetImagem extends HttpServlet 
+{
 	private String nomeCompletoImg;
 	private static String IMG_PLACEHOLDER = "do_not_rename.jpg";
+	private static String CAMINHO_IMGS_SALVAS = "/WEB-INF/imagens";
 	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
@@ -29,7 +31,7 @@ public class GetImagem extends HttpServlet {
 		if (request.getParameter("id") == null || request.getParameter("id").isEmpty())
 			return;
 		int id = Integer.parseInt(request.getParameter("id"));
-		String caminhoPastaImagem = request.getServletContext().getRealPath("/imagens");
+		String caminhoPastaImagem = request.getServletContext().getRealPath(CAMINHO_IMGS_SALVAS);
 		byte[] imagem = recuperarImagemOuDefault(caminhoPastaImagem, id);
 		if (imagem == null)
 			return;

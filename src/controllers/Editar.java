@@ -22,6 +22,9 @@ import model.entities.Vinho;
 @MultipartConfig()
 public class Editar extends HttpServlet 
 {
+	private static String CAMINHO_IMGS_SALVAS = "/WEB-INF/imagens";
+	
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 
 	{
@@ -75,7 +78,7 @@ public class Editar extends HttpServlet
 		// Salva/Substitui uma imagem, caso tenha sido upada no formato <id>.<extensao>
 		if (imagem.getSize() != 0) {
 			try {
-				String caminhoPasta = request.getServletContext().getRealPath("/imagens");
+				String caminhoPasta = request.getServletContext().getRealPath(CAMINHO_IMGS_SALVAS);
 				removerImagemExistente(caminhoPasta, id);
 			} catch (Exception e) {
 				System.err.println("Não foi possível deletar uma possível imagem já cadastrada");

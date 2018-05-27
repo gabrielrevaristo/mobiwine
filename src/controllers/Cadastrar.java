@@ -17,7 +17,9 @@ import model.entities.Vinho;
 
 @WebServlet("/Cadastro")
 @MultipartConfig()
-public class Cadastrar extends HttpServlet {
+public class Cadastrar extends HttpServlet 
+{
+	private static String CAMINHO_IMGS_SALVAS = "/WEB-INF/imagens";
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -52,7 +54,7 @@ public class Cadastrar extends HttpServlet {
 			String extensao = imagem.getSubmittedFileName().split("\\.")[1];
 			String nomeImagem = String.valueOf(id) +  "." + extensao;
 			// Obtendo caminho da pasta 'imagens'
-			String caminho = request.getServletContext().getRealPath("/imagens");
+			String caminho = request.getServletContext().getRealPath(CAMINHO_IMGS_SALVAS);
 			// Obtendo caminho completo para salvar a imagem
 			Path caminhoCompleto = Paths.get(caminho, nomeImagem);
 			System.out.println("Salvando imagem em: " + caminhoCompleto);
