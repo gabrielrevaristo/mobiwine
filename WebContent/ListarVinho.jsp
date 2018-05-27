@@ -42,9 +42,8 @@
 			<table class="table">
 				  <thead>
 				    <tr>
-				      <th scope="col">#</th>
-					  <th scope="col">Descricao</th>
-					  <th scope="col"></th>
+					  <th scope="col" style="text-align:center">Foto</th>
+					  <th scope="col">Nome/Data</th>
 					  <th scope="col">Tipo</th>
 					  <th scope="col">Preço</th>
 					  <th scope="col"></th>
@@ -54,12 +53,11 @@
 				    <c:forEach var="vinhos" items="${vinhos}"> 
 				    	<tr>
 				    		
-				    	  		<th scope="row"></th>
-				    	  		<th scope="row"><img id="img" name="img" src="GetImagem?id=${vinhos.id}" width="99" height="200" style="display:block;margin:auto; position:relative; top:50%;background:#D6394B;"/></th>
-				    	  		<th scope="row">${vinhos.nome} - ${vinhos.anoSafra}</th>
-				    	  		<th scope="row">${vinhos.tipoVinho}</th>
-				    	  		<th scope="row">${vinhos.preco}</th>
-				    	  		<th scope="row"><a href="Editar?id=${vinhos.id}"><img src="imagens/edit.png" style="height:5vh"/></a><a onclick="excluir(${vinhos.id})"><img src="imagens/delete.png" style="height:5vh; margin-left:1vh"/></a></th>
+				    	  		<td scope="row"><img id="img" name="img" src="GetImagem?id=${vinhos.id}" width="99" height="200" style="display:block;margin:auto; position:relative; top:50%;background:#D6394B;"/></th>
+				    	  		<td scope="row">${vinhos.nome} - ${vinhos.anoSafra}</th>
+				    	  		<td scope="row">${vinhos.tipoVinho}</th>
+				    	  		<td scope="row">R$ ${vinhos.preco}</th>
+				    	  		<td scope="row"><a href="Editar?id=${vinhos.id}"><img src="imagens/edit.png" style="height:5vh"/></a><a onclick="excluir(${vinhos.id})"><img src="imagens/delete.png" style="height:5vh; margin-left:1vh"/></a></th>
 						<tr>
 					</c:forEach>
 				  </tbody>
@@ -83,7 +81,19 @@ function excluir(id) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 <script>
-
+$(document).ready(function() {
+	var imgs = document.getElementsByTagName("img");
+	[].forEach.call(imgs, function(img) {
+		if (img.name != "img")
+			return;
+		img.width = img.naturalWidth;
+		img.height = img.naturalHeight;
+		while (img.width > 200 || img.height > 200) {
+			img.width *= 0.9;
+			img.height *= 0.9;
+		}
+	});
+});
 </script>
 </body>
 </html>
