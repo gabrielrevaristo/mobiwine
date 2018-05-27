@@ -1,0 +1,17 @@
+*Tecnologias usadas: 
+ - Java para Web: JSP, JSTL e Servlets;
+ - Web: HTML5, CSS, Bootstrap, JS e jQuery;
+
+
+
+
+*Antes de inicializar o projeto no servidor:
+ - Executar o script que está em "res/bebida.sql" no servidor;
+
+
+
+*Integrantes:
+ Gabriel Rodrigues Evaristo;
+ Tácio Monteiro Costa;
+ Thiago Tenório Novaes;
+ 
