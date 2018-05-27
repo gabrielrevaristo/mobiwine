@@ -52,13 +52,26 @@
 				  <tbody>
 				    <c:forEach var="vinhos" items="${vinhos}"> 
 				    	<tr>
-				    		
-				    	  		<td scope="row"><img id="img" name="img" src="GetImagem?id=${vinhos.id}" width="99" height="200" style="display:block;margin:auto; position:relative; top:50%;background:#D6394B;"/></th>
-				    	  		<td scope="row">${vinhos.nome} - ${vinhos.anoSafra}</th>
-				    	  		<td scope="row">${vinhos.tipoVinho}</th>
-				    	  		<td scope="row">R$ ${vinhos.preco}</th>
-				    	  		<td scope="row"><a href="Editar?id=${vinhos.id}"><img src="imagens/edit.png" style="height:5vh"/></a><a onclick="excluir(${vinhos.id})"><img src="imagens/delete.png" style="height:5vh; margin-left:1vh"/></a></th>
-						<tr>
+							  <td scope="row">
+								  <img id="img" name="img" src="GetImagem?id=${vinhos.id}" width="99" height="200" style="display:block;margin:auto; position:relative; top:50%;background:#D6394B;"/>
+							  </td>
+							  <td scope="row">${vinhos.nome} - ${vinhos.anoSafra}</td>
+							  <td scope="row">
+								  <c:choose>
+									  <c:when test="${vinhos.tipoVinho == '1' }">
+										  <c:out value="Tinto" />
+									  </c:when>
+									  <c:when test="${vinhos.tipoVinho == '2' }">
+										  <c:out value="Branco" />
+									  </c:when>
+									  <c:when test="${vinhos.tipoVinho == '3'}">
+										  <c:out value="Rosé" />
+									  </c:when>
+								  </c:choose>
+							  </td>
+							  <td scope="row">R$ ${vinhos.preco}</td>
+							  <td scope="row"><a href="Editar?id=${vinhos.id}"><img src="imagens/edit.png" style="height:5vh"/></a><a onclick="excluir(${vinhos.id})"><img src="imagens/delete.png" style="height:5vh; margin-left:1vh"/></a></td>
+						</tr>
 					</c:forEach>
 				  </tbody>
 				</table>
